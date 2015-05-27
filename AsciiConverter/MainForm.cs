@@ -16,6 +16,7 @@ namespace AsciiConverter
     {
 
         private int counter = 0;
+        public Thread t;
 
         public void printText(string txt)
         {
@@ -58,8 +59,6 @@ namespace AsciiConverter
             t.Priority = ThreadPriority.BelowNormal;
             t.Start();                         
         }
-
-        public Thread t;
 
         public void fillPrintBox()
         {
