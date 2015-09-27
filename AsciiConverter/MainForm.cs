@@ -40,12 +40,22 @@ namespace AsciiConverter
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {            
+        {
+            convertToChar();
+        }
+
+        private void convertToChar()
+        {
             char c = (char)numericUpDown1.Value;
             ansBox1.Text = c.ToString();
         }
 
         private void button2_Click(object sender, EventArgs e)
+        {
+            converToAscii();
+        }
+
+        private void converToAscii()
         {
             if (string.IsNullOrEmpty(textBox1.Text)) return;
             char c = (char)textBox1.Text[0];
@@ -54,12 +64,17 @@ namespace AsciiConverter
 
         private void button3_Click(object sender, EventArgs e)
         {
+            StartPrinting();
+        }
+
+        private void StartPrinting()
+        {
             printBox.Clear();
             t = new Thread(fillPrintBox);
             t.Priority = ThreadPriority.BelowNormal;
-            t.Start();                         
+            t.Start();
         }
-
+        
         public void fillPrintBox()
         {
             int a = (int)printerStart.Value;
@@ -93,6 +108,30 @@ namespace AsciiConverter
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Icon = Properties.Resources.MainIcon;
+        }
+
+        private void numericUpDown1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))            
+                convertToChar();            
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+                converToAscii();
+        }
+
+        private void printerStart_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+                StartPrinting();
+        }
+
+        private void printerEnd_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+                StartPrinting();
         }
     }
 }

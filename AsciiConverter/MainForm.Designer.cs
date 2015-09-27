@@ -52,7 +52,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(70, 15);
+            this.numericUpDown1.Location = new System.Drawing.Point(84, 15);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -61,11 +61,12 @@
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(65, 20);
             this.numericUpDown1.TabIndex = 0;
+            this.numericUpDown1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown1_KeyPress);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 17);
+            this.label1.Location = new System.Drawing.Point(43, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 1;
@@ -74,7 +75,7 @@
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button1.Location = new System.Drawing.Point(141, 12);
+            this.button1.Location = new System.Drawing.Point(155, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -85,7 +86,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 46);
+            this.label2.Location = new System.Drawing.Point(43, 46);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 3;
@@ -94,7 +95,7 @@
             // button2
             // 
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button2.Location = new System.Drawing.Point(141, 41);
+            this.button2.Location = new System.Drawing.Point(155, 41);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 6;
@@ -104,15 +105,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(70, 43);
+            this.textBox1.Location = new System.Drawing.Point(84, 43);
             this.textBox1.MaxLength = 1;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(65, 20);
             this.textBox1.TabIndex = 7;
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // ansBox1
             // 
-            this.ansBox1.Location = new System.Drawing.Point(222, 14);
+            this.ansBox1.Location = new System.Drawing.Point(236, 14);
             this.ansBox1.MaxLength = 1;
             this.ansBox1.Name = "ansBox1";
             this.ansBox1.ReadOnly = true;
@@ -121,7 +123,7 @@
             // 
             // ansBox2
             // 
-            this.ansBox2.Location = new System.Drawing.Point(222, 43);
+            this.ansBox2.Location = new System.Drawing.Point(236, 43);
             this.ansBox2.MaxLength = 1;
             this.ansBox2.Name = "ansBox2";
             this.ansBox2.ReadOnly = true;
@@ -215,6 +217,7 @@
             0,
             0,
             0});
+            this.printerEnd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.printerEnd_KeyPress);
             // 
             // printerStart
             // 
@@ -237,6 +240,7 @@
             0,
             0,
             0});
+            this.printerStart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.printerStart_KeyPress);
             // 
             // mainForm
             // 
