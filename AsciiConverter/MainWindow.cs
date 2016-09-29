@@ -32,7 +32,7 @@ namespace AsciiConverter
         private void convertToChar()
         {
             char c = core.GetCharFromDecimal(numericUpDown1.Value);
-            ansBox1.Text = c.ToString();
+            printer.SetText(c, ansBox1);      
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -45,7 +45,7 @@ namespace AsciiConverter
             if (string.IsNullOrEmpty(textBox1.Text))
                 return;
             char c = textBox1.Text[0];
-            ansBox2.Text = core.GetIntFromChar(c).ToString();
+            printer.SetText(core.GetIntFromChar(c), ansBox2);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -72,7 +72,7 @@ namespace AsciiConverter
                 for (int i = a; i <= b; i++)
                 {
                     char c = core.GetCharFromInt(i);
-                    cacheStr += i.ToString() + ": " + c.ToString() + "; ";
+                    cacheStr += string.Format("{0}: {1}; ", i, c);
                     flushCounter += 1;
                     if (flushCounter > cacheSize)
                     {

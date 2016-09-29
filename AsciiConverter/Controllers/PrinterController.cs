@@ -25,5 +25,20 @@ namespace AsciiConverter.Controllers
                 printBox.ScrollToCaret();
             }
         }
+
+        public void SetText(char text, TextBox targetBox)
+        {
+            SetText(text.ToString(), targetBox);
+        }
+
+        public void SetText(int text, TextBox targetBox)
+        {
+            SetText(text.ToString(), targetBox);
+        }
+
+        public void SetText(string text, TextBox targetBox)
+        {
+            targetBox.Text = text;
+        }
     }
 }

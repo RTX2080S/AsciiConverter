@@ -9,5 +9,8 @@ namespace AsciiConverter.Interfaces
     interface IPrinterController
     {
         void PrintText(string txt, TextBox printBox, Form owner);
+        void SetText(string text, TextBox targetBox);
+        void SetText(int text, TextBox targetBox);
+        void SetText(char text, TextBox targetBox);        
     }
 }
