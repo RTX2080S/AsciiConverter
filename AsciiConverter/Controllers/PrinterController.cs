@@ -20,7 +20,7 @@ namespace AsciiConverter.Controllers
             }
             else
             {
-                printBox.Text += txt;             
+                printBox.Text += txt;
                 printBox.Select(printBox.Text.Length, 0);
                 printBox.ScrollToCaret();
             }

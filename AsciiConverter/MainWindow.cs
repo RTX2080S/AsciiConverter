@@ -1,27 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Threading;
 using AsciiConverter.Controllers;
-using AsciiConverter.Providers;
+using AsciiConverter.Interfaces;
 
 namespace AsciiConverter
 {
     public partial class MainWindow : Form
     {
-        private PrinterController printer;
-        private ThreadController myThread;
+        private IPrinterController printer;
+        private IThreadController thread;
+        private IAsciiController core;
 
         public MainWindow()
         {
             InitializeComponent();
             printer = new PrinterController();
-            myThread = new ThreadController();
+            thread = new ThreadController();
+            core = new AsciiController();
         }
 
         private void InitUI()
@@ -36,7 +31,7 @@ namespace AsciiConverter
 
         private void convertToChar()
         {
-            char c = (char)numericUpDown1.Value;
+            char c = core.GetCharFromDecimal(numericUpDown1.Value);
             ansBox1.Text = c.ToString();
         }
 
@@ -50,7 +45,7 @@ namespace AsciiConverter
             if (string.IsNullOrEmpty(textBox1.Text))
                 return;
             char c = textBox1.Text[0];
-            ansBox2.Text = ((int)c).ToString();
+            ansBox2.Text = core.GetIntFromChar(c).ToString();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -61,8 +56,8 @@ namespace AsciiConverter
         private void StartPrinting()
         {
             printBox.Clear();
-            myThread.AccessThread(fillPrintBox);
-            myThread.StartThread();
+            thread.AccessThread(fillPrintBox);
+            thread.StartThread();
         }
 
         public void fillPrintBox()
@@ -76,7 +71,7 @@ namespace AsciiConverter
                 int flushCounter = 0;
                 for (int i = a; i <= b; i++)
                 {
-                    char c = (char)i;
+                    char c = core.GetCharFromInt(i);
                     cacheStr += i.ToString() + ": " + c.ToString() + "; ";
                     flushCounter += 1;
                     if (flushCounter > cacheSize)
@@ -92,7 +87,7 @@ namespace AsciiConverter
 
         private void button4_Click(object sender, EventArgs e)
         {
-            myThread.AbortThread();
+            thread.AbortThread();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -122,6 +117,11 @@ namespace AsciiConverter
         {
             if (e.KeyChar == Convert.ToChar(Keys.Enter))
                 StartPrinting();
+        }
+
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            thread.AbortThread();
         }
     }
 }

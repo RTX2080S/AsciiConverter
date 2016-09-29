@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace AsciiConverter.Providers
+namespace AsciiConverter.Controllers
 {
     public class ThreadController : IThreadController
     {
@@ -13,7 +13,7 @@ namespace AsciiConverter.Providers
 
         public Thread AccessThread(ThreadStart start)
         {
-            _thread = _thread ?? new Thread(start);
+            _thread = new Thread(start);
             _thread.Priority = ThreadPriority.BelowNormal;
             return _thread;
         }

@@ -242,7 +242,7 @@
             0});
             this.printerStart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.printerStart_KeyPress);
             // 
-            // mainForm
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -261,9 +261,10 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(360, 500);
             this.MinimumSize = new System.Drawing.Size(360, 500);
-            this.Name = "mainForm";
+            this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ascii Converter";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox1.ResumeLayout(false);
