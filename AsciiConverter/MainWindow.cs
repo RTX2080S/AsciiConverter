@@ -7,36 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using AsciiConverter.Controllers;
+using AsciiConverter.Providers;
 
 namespace AsciiConverter
 {
-    delegate void invokeTextBox(string txt);
-     
-    public partial class mainForm : Form
+    public partial class MainWindow : Form
     {
+        private PrinterController printer;
+        private ThreadController myThread;
 
-        private int counter = 0;
-        public Thread t;
-
-        public void printText(string txt)
-        {
-            if (printBox.InvokeRequired)
-            {
-                invokeTextBox d = new invokeTextBox(printText);
-                this.Invoke(d, txt);
-            }
-            else
-            {
-                printBox.Text += txt;
-                counter += 1;
-                printBox.Select(printBox.Text.Length, 0);
-                printBox.ScrollToCaret();
-            }
-        }
-
-        public mainForm()
+        public MainWindow()
         {
             InitializeComponent();
+            printer = new PrinterController();
+            myThread = new ThreadController();
+        }
+
+        private void InitUI()
+        {
+            Icon = Properties.Resources.MainIcon;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -57,8 +47,9 @@ namespace AsciiConverter
 
         private void converToAscii()
         {
-            if (string.IsNullOrEmpty(textBox1.Text)) return;
-            char c = (char)textBox1.Text[0];
+            if (string.IsNullOrEmpty(textBox1.Text))
+                return;
+            char c = textBox1.Text[0];
             ansBox2.Text = ((int)c).ToString();
         }
 
@@ -70,11 +61,10 @@ namespace AsciiConverter
         private void StartPrinting()
         {
             printBox.Clear();
-            t = new Thread(fillPrintBox);
-            t.Priority = ThreadPriority.BelowNormal;
-            t.Start();
+            myThread.AccessThread(fillPrintBox);
+            myThread.StartThread();
         }
-        
+
         public void fillPrintBox()
         {
             int a = (int)printerStart.Value;
@@ -91,29 +81,29 @@ namespace AsciiConverter
                     flushCounter += 1;
                     if (flushCounter > cacheSize)
                     {
-                        printText(cacheStr);
+                        printer.PrintText(cacheStr, printBox, this);
                         flushCounter = 0;
                         cacheStr = null;
                     }
                 }
-                printText(cacheStr);
-            }            
+                printer.PrintText(cacheStr, printBox, this);
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (t != null) t.Abort();
+            myThread.AbortThread();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Icon = Properties.Resources.MainIcon;
+            InitUI();
         }
 
         private void numericUpDown1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == Convert.ToChar(Keys.Enter))            
-                convertToChar();            
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+                convertToChar();
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)

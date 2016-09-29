@@ -1,6 +1,6 @@
 ﻿namespace AsciiConverter
 {
-    partial class mainForm
+    partial class MainWindow
     {
         /// <summary>
         /// Required designer variable.
