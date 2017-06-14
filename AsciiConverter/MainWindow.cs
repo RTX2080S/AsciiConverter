@@ -60,7 +60,7 @@ namespace AsciiConverter
             thread.StartThread();
         }
 
-        public void fillPrintBox()
+        private void fillPrintBox()
         {
             int a = (int)printerStart.Value;
             int b = (int)printerEnd.Value;
